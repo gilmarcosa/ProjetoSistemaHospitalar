@@ -5,6 +5,7 @@ from app import crud
 from app.schemas import paciente as schemas
 from app.crud import paciente as crud_paciente
 
+
 router = APIRouter(prefix="/pacientes", tags=["Pacientes"])
 
 @router.post("/", response_model=schemas.PacienteRead)

@@ -10,7 +10,8 @@ from app.routers import telemedicina
 from app.routers import leito
 from app.routers import administracao
 from app.routers import internacao
-from app.routers import auth  # novo
+from app.routers import auth
+
 app = FastAPI()
 
 app.include_router(profissionalInternacao.router)

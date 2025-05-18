@@ -3,8 +3,19 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.crud import consulta as crud_consulta
 from app.schemas import consulta as schemas
+from app.core.dependencies import verificar_token
 
-router = APIRouter(prefix="/consultas", tags=["Consultas"])
+
+router = APIRouter(
+    prefix="/consultas",
+    tags=["Consultas"],
+    dependencies=[Depends(verificar_token)]
+)
+
+
+@router.get("/consulta", dependencies=[Depends(verificar_token)])
+def rota_protegida():
+    return {"mensagem": "Acesso com token autorizado"}
 
 @router.post("/", response_model=schemas.ConsultaRead)
 def create_consulta(consulta: schemas.ConsultaCreate, db: Session = Depends(get_db)):
